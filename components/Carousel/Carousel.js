@@ -26,21 +26,39 @@ function createCarousel() {
     './assets/carousel/trees.jpeg',
     './assets/carousel/turntable.jpeg'];
 
+  let selectedImage = 0;
   const carousel = document.createElement('div');
   const left = document.createElement('div');
   const right = document.createElement('div');
   const images = img.map(url => {
     const image = document.createElement('img');
     image.src = url;
+    image.classList.add('hidden');
     return image
   });
+  images[0].classList.remove('hidden');
 
   carousel.classList.add('carousel');
   left.classList.add('left-button');
-  left.textContent=" < ";
+  left.textContent = " < ";
   right.classList.add('right-button');
   right.textContent = " > ";
 
+  left.addEventListener('click', () => {
+    selectedImage = selectedImage === 0 ? images.length - 1 : selectedImage - 1;
+    for (let i = 0; i < images.length; i++) {
+      if (i == selectedImage) images[i].classList.remove('hidden');
+      else images[i].classList.add('hidden');
+    }
+  });
+
+  right.addEventListener('click', () => {
+    selectedImage = selectedImage === images.length -1 ? 0 : selectedImage + 1;
+    for (let i = 0; i < images.length; i++) {
+      if (i == selectedImage) images[i].classList.remove('hidden');
+      else images[i].classList.add('hidden');
+    }
+  });
   carousel.appendChild(left);
   images.forEach(img => carousel.appendChild(img));
   carousel.appendChild(right);
