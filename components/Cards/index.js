@@ -17,12 +17,21 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
-document.querySelector('.cards-container').appendChild(makeCard("Everybody poops","google.com","David"));
+//document.querySelector('.cards-container').appendChild(makeCard("Everybody poops","google.com","David"));
 axios
     .get('https://lambda-times-backend.herokuapp.com/articles')
-    .then(x => console.log(x));
+    .then(response =>
+        Object.values(response.data.articles)
+            .flat()
+    )
+    .then(articleData =>
+        articleData.map(item => makeCard(item.headline, item.authorPhoto, item.authorName))
+    )
+    .then(
+        articles => articles.forEach(article => document.querySelector('.cards-container').appendChild(article))
+    );
 
-function makeCard(_headline, _authorPhoto, _authorName){ 
+function makeCard(_headline, _authorPhoto, _authorName) {
     const card = document.createElement('div');
     const headline = document.createElement('div');
     const author = document.createElement('div');
@@ -32,7 +41,7 @@ function makeCard(_headline, _authorPhoto, _authorName){
 
     card.classList.add('card');
     headline.classList.add('headline');
-    headline.textContent=_headline;
+    headline.textContent = _headline;
     author.classList.add('author');
     imgContainer.classList.add('img-container');
     image.src = _authorPhoto;
