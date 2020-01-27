@@ -194,6 +194,9 @@ body {
   font-weight: bold;
   text-transform: uppercase;
 }
+.tabs .topics .tab.selected {
+  background-color: #111;
+}
 .tabs .topics .tab:hover {
   text-decoration: underline;
 }

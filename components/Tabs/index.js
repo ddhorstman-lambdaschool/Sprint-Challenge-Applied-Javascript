@@ -26,6 +26,8 @@ function createTab(topic){
                 card.classList.remove('hidden');
             else if(!card.classList.contains('hidden'))
                 card.classList.add('hidden');
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('selected'));
+            tab.classList.add('selected');
         })
     );
     return tab
