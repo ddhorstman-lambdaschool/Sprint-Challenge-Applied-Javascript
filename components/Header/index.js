@@ -9,7 +9,9 @@
 //  </div >
 // And add it to the DOM in the .header-container component
 Header();
-
+/** Creates the header object and adds it to the DOM.
+ * Reads the current date to update accordingly.
+*/
 function Header() {
     const months = ['January', 'February','March','April','May','June','July','August','September','October','November','December'];
     let now = new Date(Date.now());
@@ -17,7 +19,10 @@ function Header() {
     const header = makeHeader(dateString);
     document.querySelector('.header-container').appendChild(header);
 }
-
+/** Makes the actual header element. 
+ * @param {string} _date The formatted date string.
+ * @returns {HTMLDivElement} The header div.
+*/
 function makeHeader(_date){
     const header = document.createElement('div');
     const date = document.createElement('span');

@@ -14,7 +14,12 @@ axios
             document.querySelector('.topics').appendChild(createTab(topic))
         )
     );
-
+/** Create a tab event based on a given topic. When clicked, it toggles visibility of
+ * posts pertaining to that topic.
+ * 
+ * @param {string} topic The topic the tab controls.
+ * @returns {HTMLDivElement} A clickable tab button.
+ */
 function createTab(topic){
     const tab = document.createElement('div');
     tab.classList.add('tab');
@@ -25,7 +30,7 @@ function createTab(topic){
             document.querySelectorAll('.card').forEach(
                 card => card.classList.remove('hidden')
             );
-            if(document.selection) document.selection.empty;
+            if(document.selection) document.selection.empty();
             return;
         }
         //else - no need b/c of return above
@@ -39,7 +44,7 @@ function createTab(topic){
             else if(!card.classList.contains('hidden'))
                 card.classList.add('hidden');
         })
-       if (document.selection) document.selection.empty;
+       if (document.selection) document.selection.empty();
     });
     return tab
 }

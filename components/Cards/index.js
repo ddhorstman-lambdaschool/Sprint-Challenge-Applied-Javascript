@@ -17,24 +17,33 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
-//document.querySelector('.cards-container').appendChild(makeCard("Everybody poops","google.com","David"));
+
 axios
     .get('https://lambda-times-backend.herokuapp.com/articles')
     .then(response =>
         Object.keys(response.data.articles)
             .map(topic => {
+            //Use the Object keys to add the topic into each article
                 const articlesByTopic = response.data.articles[topic];
                 articlesByTopic.forEach(item => item.topic = topic);
                 return articlesByTopic;
             })
             .flat()
             .forEach(item => {
+            //Make the article element and attach it to the DOM
                 const article = makeCard(item.headline, item.authorPhoto, item.authorName, item.topic);
                 document.querySelector('.cards-container').appendChild(article);
             })
     )
     .catch(e => console.log(e));
 
+/** Creates a card for a given news article.
+ * @param  {string} _headline The headline.
+ * @param  {string} _authorPhoto The address of the author's photo.
+ * @param  {string} _authorName The author's name.
+ * @param  {string} _topic The article's topic - used for sorting.
+ * @returns {HTMLDivElement} The formatted article div.
+ */
 function makeCard(_headline, _authorPhoto, _authorName, _topic) {
     const card = document.createElement('div');
     const headline = document.createElement('div');

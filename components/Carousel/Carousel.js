@@ -19,7 +19,6 @@ document.querySelector('.carousel-container').appendChild(createCarousel());
   </div>
 */
 
-
 function createCarousel() {
   const img = ['./assets/carousel/mountains.jpeg',
     './assets/carousel/computer.jpeg',
@@ -53,6 +52,7 @@ function createCarousel() {
       }
       else images[i].classList.remove('selected');
     }
+    if (document.selection) document.selection.empty();
   });
 
   right.addEventListener('click', () => {
@@ -65,6 +65,7 @@ function createCarousel() {
       }
       else images[i].classList.remove('selected');
     }
+    if (document.selection) document.selection.empty();
   });
   carousel.appendChild(left);
   images.forEach(img => carousel.appendChild(img));
