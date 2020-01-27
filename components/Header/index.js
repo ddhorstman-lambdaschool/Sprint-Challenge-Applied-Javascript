@@ -11,7 +11,7 @@
 Header();
 
 function Header() {
-    const months = ['January', 'February','March'];
+    const months = ['January', 'February','March','April','May','June','July','August','September','October','November','December'];
     let now = new Date(Date.now());
     let dateString = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
     const header = makeHeader(dateString);

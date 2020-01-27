@@ -23,13 +23,12 @@ axios
     .then(response =>
         Object.values(response.data.articles)
             .flat()
+            .forEach(item => {
+                const article = makeCard(item.headline, item.authorPhoto, item.authorName);
+                document.querySelector('.cards-container').appendChild(article);
+            })
     )
-    .then(articleData =>
-        articleData.map(item => makeCard(item.headline, item.authorPhoto, item.authorName))
-    )
-    .then(
-        articles => articles.forEach(article => document.querySelector('.cards-container').appendChild(article))
-    );
+    .catch(e => console.log(e));
 
 function makeCard(_headline, _authorPhoto, _authorName) {
     const card = document.createElement('div');
