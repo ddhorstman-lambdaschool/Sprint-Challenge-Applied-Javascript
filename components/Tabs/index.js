@@ -10,10 +10,23 @@
 axios
     .get('https://lambda-times-backend.herokuapp.com/topics')
     .then(res => res.data.topics.map(
-        i => {
-            const tab = document.createElement('div');
-            tab.classList.add('tab');
-            tab.textContent = i;
-            document.querySelector('.topics').appendChild(tab);
+        topic => 
+            document.querySelector('.topics').appendChild(createTab(topic))
+        )
+    );
+
+function createTab(topic){
+    const tab = document.createElement('div');
+    tab.classList.add('tab');
+    tab.textContent = topic;
+    tab.addEventListener('click', () =>
+        document.querySelectorAll('.card').forEach( card => {
+            if(topic==='node.js')topic='node';
+            if(card.getAttribute('data-topic')===topic)
+                card.classList.remove('hidden');
+            else if(!card.classList.contains('hidden'))
+                card.classList.add('hidden');
         })
     );
+    return tab
+}
