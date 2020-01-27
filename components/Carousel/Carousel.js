@@ -7,6 +7,7 @@
     6. Have fun!
 */
 
+document.querySelector('.carousel-container').appendChild(createCarousel());
 /* HTML:
   <div class="carousel">
     <div class="left-button"> < </div>
@@ -17,3 +18,32 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+
+function createCarousel() {
+  const img = ['./assets/carousel/mountains.jpeg',
+    './assets/carousel/computer.jpeg',
+    './assets/carousel/trees.jpeg',
+    './assets/carousel/turntable.jpeg'];
+
+  const carousel = document.createElement('div');
+  const left = document.createElement('div');
+  const right = document.createElement('div');
+  const images = img.map(url => {
+    const image = document.createElement('img');
+    image.src = url;
+    return image
+  });
+
+  carousel.classList.add('carousel');
+  left.classList.add('left-button');
+  left.textContent=" < ";
+  right.classList.add('right-button');
+  right.textContent = " > ";
+
+  carousel.appendChild(left);
+  images.forEach(img => carousel.appendChild(img));
+  carousel.appendChild(right);
+
+  return carousel;
+}
