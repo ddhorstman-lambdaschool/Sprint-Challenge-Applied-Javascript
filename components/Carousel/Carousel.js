@@ -33,10 +33,9 @@ function createCarousel() {
   const images = img.map(url => {
     const image = document.createElement('img');
     image.src = url;
-    image.classList.add('hidden');
     return image
   });
-  images[0].classList.remove('hidden');
+  images[0].classList.add('selected');
 
   carousel.classList.add('carousel');
   left.classList.add('left-button');
@@ -47,16 +46,24 @@ function createCarousel() {
   left.addEventListener('click', () => {
     selectedImage = selectedImage === 0 ? images.length - 1 : selectedImage - 1;
     for (let i = 0; i < images.length; i++) {
-      if (i == selectedImage) images[i].classList.remove('hidden');
-      else images[i].classList.add('hidden');
+      if (i == selectedImage){ 
+        images[i].classList.add('selected');
+        images[i].classList.add('left');
+        images[i].classList.remove('right');
+      }
+      else images[i].classList.remove('selected');
     }
   });
 
   right.addEventListener('click', () => {
     selectedImage = selectedImage === images.length -1 ? 0 : selectedImage + 1;
     for (let i = 0; i < images.length; i++) {
-      if (i == selectedImage) images[i].classList.remove('hidden');
-      else images[i].classList.add('hidden');
+      if (i == selectedImage) {
+        images[i].classList.add('selected');
+        images[i].classList.add('right');
+        images[i].classList.remove('left');
+      }
+      else images[i].classList.remove('selected');
     }
   });
   carousel.appendChild(left);

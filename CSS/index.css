@@ -307,7 +307,53 @@ body {
 }
 .carousel img {
   width: 100%;
-}
-.carousel img.hidden {
   display: none;
+  z-index: -1;
+  animation-duration: 1s;
 }
+.carousel img.selected {
+  display: block;
+}
+.carousel img.selected.right {
+  animation-name: slideinleft;
+}
+.carousel img.selected.left {
+  animation-name: slideinright;
+}
+@keyframes slideinleft {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideinright {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+/*
+@keyframes slideoutleft{
+    from {
+    transform: translateX(0);
+  }
+
+  to {
+   transform: translateX(-100%);
+  }
+}
+
+@keyframes slideoutright{
+    from {
+    transform: translateX(0);
+  }
+
+  to {
+   transform: translateX(100%);
+  }
+}
+*/
