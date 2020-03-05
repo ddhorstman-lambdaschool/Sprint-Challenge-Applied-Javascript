@@ -7,6 +7,7 @@
     6. Have fun!
 */
 
+document.querySelector('.carousel-container').appendChild(createCarousel());
 /* HTML:
   <div class="carousel">
     <div class="left-button"> < </div>
@@ -17,3 +18,58 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+function createCarousel() {
+  const img = ['./assets/carousel/mountains.jpeg',
+    './assets/carousel/computer.jpeg',
+    './assets/carousel/trees.jpeg',
+    './assets/carousel/turntable.jpeg'];
+
+  let selectedImage = 0;
+  const carousel = document.createElement('div');
+  const left = document.createElement('div');
+  const right = document.createElement('div');
+  const images = img.map(url => {
+    const image = document.createElement('img');
+    image.src = url;
+    return image
+  });
+  images[0].classList.add('selected');
+
+  carousel.classList.add('carousel');
+  left.classList.add('left-button');
+  left.textContent = " < ";
+  right.classList.add('right-button');
+  right.textContent = " > ";
+
+  left.addEventListener('click', () => {
+    selectedImage = selectedImage === 0 ? images.length - 1 : selectedImage - 1;
+    for (let i = 0; i < images.length; i++) {
+      if (i == selectedImage){ 
+        images[i].classList.add('selected');
+        images[i].classList.add('left');
+        images[i].classList.remove('right');
+      }
+      else images[i].classList.remove('selected');
+    }
+    if (document.selection) document.selection.empty();
+  });
+
+  right.addEventListener('click', () => {
+    selectedImage = selectedImage === images.length -1 ? 0 : selectedImage + 1;
+    for (let i = 0; i < images.length; i++) {
+      if (i == selectedImage) {
+        images[i].classList.add('selected');
+        images[i].classList.add('right');
+        images[i].classList.remove('left');
+      }
+      else images[i].classList.remove('selected');
+    }
+    if (document.selection) document.selection.empty();
+  });
+  carousel.appendChild(left);
+  images.forEach(img => carousel.appendChild(img));
+  carousel.appendChild(right);
+
+  return carousel;
+}
